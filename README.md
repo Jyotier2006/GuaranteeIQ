@@ -59,7 +59,7 @@ See `qa/` for exact computed values and screenshots. These are software checks, 
 
 - `src/model.ts`: the monthly, 144-month stress-time and cycling model, parameter sampling, presets, rate card and acceptance checks.
 - `src/model.worker.ts`: Comlink worker API. Monte Carlo computation stays off the UI thread.
-- Interactive controls: **2,000 simulations**, seed 42, 150 ms debounce.
+- Interactive controls: **10,000 simulations**, seed 42, 150 ms debounce, so presets match the reference figures. Capacity-chart bands are drawn from the first 2,000 of those projects to keep slider updates fast. The rate card also uses 10,000 per cell, in its own worker.
 - Hero/gap scenario references and QA: **10,000 simulations**, seed 42. This stabilizes the headline and rare-event reference.
 - RNG: Mulberry32 + Box–Muller. A NumPy run with the same numeric seed does not generate the same random sequence. Low-frequency tail payouts vary particularly strongly. The computed 10,000-sample lab premium is approximately ₹0.7 lakh, rather than the team's approximately ₹0.5 lakh; this is disclosed rather than hard-coded or tuned away.
 - Each parameter is sampled once per project and persists across its entire path. Scenarios reuse common random numbers for comparisons; uncertain parameters are otherwise sampled independently.

@@ -216,8 +216,8 @@ export const ASSUMPTIONS = [
   ],
   [
     "Simulations and random seed",
-    "2,000 / 42",
-    "QA uses 10,000 with same seed",
+    "10,000 / 42",
+    "Sensitivity chart uses 2,000 per case; same seed",
     "Mulberry32 + Box–Muller; independent parameter draws, persistent per project",
     "MODEL SETTING",
   ],

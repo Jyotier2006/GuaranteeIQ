@@ -292,7 +292,8 @@ export default function App() {
   const worker = useRef<Worker | null>(null),
     api = useRef<Remote<ModelWorker> | null>(null),
     request = useRef(0),
-    rateRequest = useRef(0);
+    rateRequest = useRef(0),
+    rateWorker = useRef<Worker | null>(null);
   const reduced = useReducedMotion();
   useEffect(() => {
     const w = new Worker(new URL("./model.worker.ts", import.meta.url), {
@@ -339,15 +340,30 @@ export default function App() {
     }, 150);
     return () => clearTimeout(timer);
   }, [inputs]);
+  // The 64-cell rate card runs 10,000 projects per cell (~2–3 s), so it gets
+  // its own worker: it never delays the simulator, and a newer request
+  // terminates an older one that is still computing.
+  useEffect(() => () => rateWorker.current?.terminate(), []);
   useEffect(() => {
     const id = ++rateRequest.current;
-    const timer = setTimeout(
-      () =>
-        api.current?.rate(inputs).then((r) => {
+    const timer = setTimeout(() => {
+      rateWorker.current?.terminate();
+      const w = new Worker(new URL("./model.worker.ts", import.meta.url), {
+        type: "module",
+      });
+      rateWorker.current = w;
+      wrap<ModelWorker>(w)
+        .rate(inputs)
+        .then((r) => {
           if (id === rateRequest.current) setRates(r);
-        }),
-      500,
-    );
+        })
+        .finally(() => {
+          if (rateWorker.current === w) {
+            w.terminate();
+            rateWorker.current = null;
+          }
+        });
+    }, 500);
     return () => clearTimeout(timer);
   }, [
     inputs.guarantee,
@@ -977,8 +993,8 @@ export default function App() {
                   format={(v) => num(v, 0)}
                 />
                 <p className="control-note">
-                  One persistent set of parameter draws per project. 2,000
-                  samples · seed 42.
+                  One persistent set of parameter draws per project. 10,000
+                  projects · seed 42.
                 </p>
               </ControlGroup>
             </aside>
@@ -1970,8 +1986,8 @@ export default function App() {
                   : "Model validation"}
             </h2>
             <p>
-              10,000 simulations · seed 42 · Mulberry32 / Box–Muller. Live
-              simulator uses 2,000 simulations.
+              10,000 simulations · seed 42 · Mulberry32 / Box–Muller. The live
+              simulator and rate card use 10,000 simulations per case.
             </p>
             {qa && (
               <>

@@ -8,12 +8,23 @@ import {
   DEFAULTS,
   SEED,
   type Inputs,
+  type Result,
   type Scenario,
 } from "./model";
+// Every number shown uses 10,000 projects, matching the hero and QA references.
+// The capacity-chart bands come from the first 2,000 of those same projects
+// (same seed): sorting 145 monthly distributions of 10,000 would add ~0.5 s to
+// each slider update without visibly changing the bands.
+const PROJECTS = 10000,
+  CURVE_PROJECTS = 2000;
+const detailed = (p: Inputs): Result => ({
+  ...simulate(p, PROJECTS, SEED, false),
+  curve: simulate(p, CURVE_PROJECTS).curve,
+});
 const api = {
   run: (p: Inputs) => ({
-    site: simulate(p),
-    lab: simulate({
+    site: detailed(p),
+    lab: detailed({
       ...p,
       ...preset("Lab"),
       guarantee: p.guarantee,
@@ -35,11 +46,16 @@ const api = {
     })),
     tornado: sensitivity(),
   }),
-  rate: (p: Inputs) => rateCard(p),
+  rate: (p: Inputs) => rateCard(p, PROJECTS),
   cooling: (p: Inputs) =>
     [0.15, 0.4, 0.7].map((beta) => ({
       beta,
-      result: simulate({ ...p, climate: "Ahmedabad", beta }, 2000, SEED, false),
+      result: simulate(
+        { ...p, climate: "Ahmedabad", beta },
+        PROJECTS,
+        SEED,
+        false,
+      ),
     })),
   qa: () => runQA(10000),
   defaults: DEFAULTS,
