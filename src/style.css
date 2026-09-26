@@ -149,7 +149,7 @@ article {
   margin-right: 10px;
 }
 .beta-badge {
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   border: 1px solid var(--line);
   padding: 5px 6px;
   letter-spacing: 0.6px;
@@ -193,7 +193,7 @@ article {
 kbd {
   border: 1px solid var(--line);
   border-radius: 3px;
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   padding: 3px 5px;
   color: var(--muted);
 }
@@ -219,7 +219,7 @@ kbd {
   align-items: center;
 }
 .eyebrow {
-  font: 10px "JetBrains Mono";
+  font: 11.5px "JetBrains Mono";
   letter-spacing: 1.4px;
   color: #76cbbf;
   display: flex;
@@ -228,7 +228,7 @@ kbd {
 }
 .eyebrow > span:not(.live-dot) {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11.5px;
   border-right: 1px solid var(--line);
   padding-right: 11px;
 }
@@ -264,7 +264,7 @@ kbd {
   color: #b0bfd0;
 }
 .benchmark-note {
-  font-size: 10px;
+  font-size: 11.5px;
   line-height: 1.6;
   max-width: 350px;
   margin-top: 10px;
@@ -309,7 +309,7 @@ kbd {
   display: flex;
   gap: 18px;
   margin-top: 25px;
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--muted);
 }
 .hero-proof > span {
@@ -337,7 +337,7 @@ kbd {
   padding: 18px 20px;
   display: flex;
   justify-content: space-between;
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   letter-spacing: 0.6px;
   color: #a2b6c9;
 }
@@ -347,7 +347,7 @@ kbd {
   align-items: center;
 }
 .scene-coordinate {
-  font-size: 8px;
+  font-size: 10px;
   color: #68809a;
 }
 .scene-wrap {
@@ -378,7 +378,7 @@ kbd {
   color: #c98500;
 }
 .thermal-tag span {
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   color: #8fa5ba;
 }
 .thermal-tag strong {
@@ -392,7 +392,7 @@ kbd {
   right: 20px;
   display: flex;
   justify-content: space-between;
-  font-size: 8px;
+  font-size: 10px;
   color: #698299;
   pointer-events: none;
 }
@@ -442,7 +442,7 @@ kbd {
   justify-content: space-between;
 }
 .scenario-tabs.small button {
-  font-size: 10px;
+  font-size: 11.5px;
   padding: 6px 11px;
 }
 .month-control {
@@ -463,11 +463,11 @@ kbd {
   cursor: pointer;
 }
 .month-control output {
-  font: 10px "JetBrains Mono";
+  font: 11.5px "JetBrains Mono";
   min-width: 22px;
 }
 .ambient-text {
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   white-space: nowrap;
   color: #8197ad;
 }
@@ -498,7 +498,7 @@ kbd {
 .hero-counter > span,
 .reference-project > span {
   display: block;
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   letter-spacing: 1px;
   color: var(--muted);
   margin-bottom: 11px;
@@ -537,7 +537,7 @@ kbd {
 .reference-project small {
   display: block;
   margin-top: 7px;
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted);
 }
 .scroll-hint {
@@ -545,7 +545,7 @@ kbd {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   letter-spacing: 1.5px;
   color: #63778f;
   margin-top: 25px;
@@ -573,12 +573,12 @@ kbd {
   justify-content: space-between;
   gap: 15px;
   padding: 21px 24px 0;
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   letter-spacing: 1px;
   color: var(--soft);
 }
 .tag {
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   padding: 5px 7px;
   background: #1b2b3c;
   border: 1px solid #2d4055;
@@ -592,7 +592,7 @@ kbd {
   gap: 19px;
   align-items: center;
   padding: 18px 24px 0;
-  font: 10px Inter;
+  font: 11.5px Inter;
   color: var(--muted);
   letter-spacing: 0;
 }
@@ -604,10 +604,10 @@ kbd {
 .chart-legend small {
   margin-left: auto;
   color: #667e96;
-  font-size: 9px;
+  font-size: 11px;
 }
 .source-caption {
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.7;
   color: #7f94a9;
   letter-spacing: 0.05px;
@@ -624,7 +624,7 @@ kbd {
   vertical-align: baseline;
 }
 .citations a {
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   color: #4bb9ac;
   border-bottom: 1px solid #337a74;
 }
@@ -642,7 +642,7 @@ kbd {
   margin-top: 28px;
 }
 .step-num {
-  font: 10px "JetBrains Mono";
+  font: 11.5px "JetBrains Mono";
   color: #55748e;
 }
 .gap-captions h3 {
@@ -663,7 +663,7 @@ kbd {
   align-items: center;
 }
 .gap-stat-band > span {
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   letter-spacing: 0.9px;
   color: var(--muted);
   max-width: 100px;
@@ -674,7 +674,7 @@ kbd {
   letter-spacing: -1px;
 }
 .gap-stat-band small {
-  font-size: 10px;
+  font-size: 11.5px;
   display: block;
   color: var(--muted);
   margin-top: 5px;
@@ -695,7 +695,7 @@ kbd {
   padding: 19px 18px 8px;
 }
 .controls-title {
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   display: flex;
   align-items: center;
   gap: 9px;
@@ -737,7 +737,7 @@ kbd {
   justify-content: space-between;
   gap: 10px;
   align-items: center;
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--soft);
 }
 .range-label output {
@@ -748,7 +748,7 @@ kbd {
 .range-control > small,
 .control-note {
   display: block;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.6;
   color: #8194a9;
   margin-top: 8px;
@@ -790,7 +790,7 @@ kbd {
 }
 .select-control,
 .number-control {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--soft);
   display: block;
   margin-bottom: 20px;
@@ -804,7 +804,7 @@ kbd {
   background: #0e1928;
   color: #aabbcc;
   padding: 10px 8px;
-  font-size: 10px;
+  font-size: 11.5px;
   min-height: 35px;
 }
 .simulator-results {
@@ -821,7 +821,7 @@ kbd {
   display: flex;
   gap: 7px;
   align-items: center;
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   letter-spacing: 0.8px;
   color: #80aaa9;
 }
@@ -839,7 +839,7 @@ kbd {
 }
 .kpi > span {
   display: block;
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   letter-spacing: 0.45px;
   line-height: 1.6;
   color: var(--muted);
@@ -856,7 +856,7 @@ kbd {
   color: #e9b264;
 }
 .kpi > small {
-  font-size: 9px;
+  font-size: 11px;
   color: var(--muted);
 }
 .premium-kpi {
@@ -880,7 +880,7 @@ kbd {
 .secondary-kpis span {
   display: flex;
   gap: 5px;
-  font: 7px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   letter-spacing: 0.5px;
   color: var(--muted);
 }
@@ -889,7 +889,7 @@ kbd {
   color: var(--soft);
 }
 .secondary-kpis small {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 400;
   color: var(--muted);
 }
@@ -899,7 +899,7 @@ kbd {
 .simulator-chart .chart-legend {
   padding: 0;
   gap: 12px;
-  font-size: 9px;
+  font-size: 11px;
 }
 .simulator-chart .chart-legend small {
   display: none;
@@ -912,17 +912,19 @@ kbd {
 }
 .sim-small-charts .panel-topline {
   padding: 18px 19px 0;
-  font-size: 8px;
+  font-size: 10px;
 }
 .mispricing {
   padding-bottom: 10px;
 }
 .pricing-row {
   display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
   align-items: center;
   justify-content: space-between;
   margin: 25px 20px 8px;
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--soft);
 }
 .pricing-row strong {
@@ -943,7 +945,7 @@ kbd {
   transition: width 0.4s;
 }
 .mispricing p {
-  font-size: 9px;
+  font-size: 11px;
   margin: 19px 20px 0;
   line-height: 1.7;
 }
@@ -951,7 +953,7 @@ kbd {
   display: flex;
   gap: 7px;
   align-items: flex-start;
-  font-size: 10px;
+  font-size: 11.5px;
   margin-top: 16px;
   color: #8fa1b5;
 }
@@ -967,11 +969,11 @@ kbd {
   margin-top: 17px;
 }
 .export-row .text-button {
-  font-size: 10px;
+  font-size: 11.5px;
 }
 .export-row > span {
   margin-left: auto;
-  font-size: 8px;
+  font-size: 10px;
   color: #647c93;
 }
 .error-message {
@@ -1009,7 +1011,7 @@ kbd {
   text-align: right;
 }
 .rate-unit > span {
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   color: var(--muted);
   letter-spacing: 1px;
 }
@@ -1017,7 +1019,7 @@ kbd {
   font: 25px "Space Grotesk";
 }
 .rate-unit > small {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--muted);
 }
 .rate-panel {
@@ -1081,7 +1083,7 @@ kbd {
   color: #5aa29d;
 }
 .rate-footnote p {
-  font-size: 10px;
+  font-size: 11.5px;
 }
 .rate-footnote strong {
   color: var(--soft);
@@ -1092,7 +1094,7 @@ kbd {
   align-items: center;
   gap: 8px;
   margin-left: auto;
-  font-size: 8px;
+  font-size: 10px;
   white-space: nowrap;
   color: var(--muted);
 }
@@ -1122,7 +1124,7 @@ kbd {
   color: #538381;
 }
 .cooling-card > span {
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   letter-spacing: 0.7px;
   color: var(--muted);
 }
@@ -1138,7 +1140,7 @@ kbd {
   margin-top: 29px;
 }
 .cooling-card > small {
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--muted);
   display: block;
   margin-top: 7px;
@@ -1156,7 +1158,7 @@ kbd {
   border-radius: 5px;
 }
 .cooling-card > p {
-  font-size: 10px;
+  font-size: 11.5px;
   margin-top: 11px;
 }
 .decision-note {
@@ -1184,7 +1186,7 @@ kbd {
   align-items: center;
   gap: 6px;
   margin-left: auto;
-  font-size: 10px;
+  font-size: 11.5px;
   white-space: nowrap;
 }
 .method-grid {
@@ -1220,7 +1222,7 @@ kbd {
   margin-bottom: 10px;
 }
 .method-step p {
-  font-size: 10px;
+  font-size: 11.5px;
   line-height: 1.75;
   min-height: 72px;
 }
@@ -1228,7 +1230,7 @@ kbd {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 9px;
+  font-size: 11px;
   color: #5ea399;
   margin-top: 17px;
 }
@@ -1239,7 +1241,7 @@ kbd {
   color: #b1c7d8;
 }
 .method-step .equation {
-  font-size: 10px;
+  font-size: 11.5px;
   padding: 0 12px 15px;
 }
 .method-details {
@@ -1342,7 +1344,7 @@ kbd {
   display: block;
 }
 .equipment-node small {
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1.6;
   color: var(--muted);
   display: block;
@@ -1367,7 +1369,7 @@ kbd {
   margin-top: 14px;
 }
 .engine-node p {
-  font-size: 9px;
+  font-size: 11px;
   margin: 10px 0 20px;
 }
 .engine-node .tag {
@@ -1394,7 +1396,7 @@ kbd {
   font: 13px "Space Grotesk";
 }
 .output-nodes small {
-  font-size: 8px;
+  font-size: 10px;
   color: var(--muted);
 }
 .evidence-grid {
@@ -1427,12 +1429,12 @@ kbd {
   margin: 20px 0 0;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11.5px;
   line-height: 2.4;
 }
 .sensitivity-ranges {
   padding: 0 24px 23px;
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--muted);
 }
 .sensitivity-ranges summary {
@@ -1443,11 +1445,11 @@ kbd {
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
-  font-size: 9px;
+  font-size: 11px;
 }
 .sensitivity-ranges strong {
   font-family: "JetBrains Mono";
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 400;
 }
 .customer-grid {
@@ -1490,11 +1492,11 @@ kbd {
   flex-wrap: wrap;
   padding: 23px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 9px;
+  font-size: 11px;
   align-items: center;
 }
 .novelty-line > span {
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   color: var(--muted);
   letter-spacing: 0.7px;
   margin-right: auto;
@@ -1528,7 +1530,7 @@ kbd {
   left: -3px;
 }
 .roadmap-grid span {
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   color: #69b6a7;
   letter-spacing: 1px;
 }
@@ -1563,11 +1565,11 @@ kbd {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 10px;
+  font-size: 11.5px;
   text-align: left;
 }
 th {
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   letter-spacing: 0.3px;
   color: var(--muted);
   padding: 15px 18px;
@@ -1595,18 +1597,29 @@ tbody tr:last-child td {
 }
 .status {
   display: inline-block;
-  font: 7px "JetBrains Mono";
-  color: #caad7b;
-  background: #4b351638;
-  border: 1px solid #6e542740;
-  padding: 4px 5px;
-  border-radius: 3px;
+  font: 500 10px "JetBrains Mono";
+  letter-spacing: 0.03em;
+  color: #e3c38c;
+  background: #4b351660;
+  border: 1px solid #8a6a3380;
+  padding: 4px 7px;
+  border-radius: 4px;
   white-space: nowrap;
 }
 .status.sourced {
-  color: #72b8a3;
-  background: #163b2e5e;
-  border-color: #3163457d;
+  color: #8fe3cf;
+  background: #163b2e90;
+  border-color: #3f8a70a0;
+}
+[data-theme="light"] .status {
+  color: #7a4f0a;
+  background: #fbefd9;
+  border-color: #e0bf86;
+}
+[data-theme="light"] .status.sourced {
+  color: #0b6450;
+  background: #dcf3ea;
+  border-color: #8fcfb9;
 }
 .source-list {
   display: grid;
@@ -1621,7 +1634,7 @@ tbody tr:last-child td {
   padding: 19px 0;
 }
 .source-list article > span {
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   color: #65b3a5;
   min-width: 20px;
   padding-top: 3px;
@@ -1637,7 +1650,7 @@ tbody tr:last-child td {
   color: var(--teal);
 }
 .source-list p {
-  font-size: 9px;
+  font-size: 11px;
   margin-top: 6px;
 }
 .footer {
@@ -1652,11 +1665,11 @@ tbody tr:last-child td {
   font-size: 20px;
 }
 .footer p {
-  font-size: 9px;
+  font-size: 11px;
 }
 .footer > span {
   margin-left: auto;
-  font-size: 9px;
+  font-size: 11px;
   color: #6d8f9f;
 }
 .drawer-overlay,
@@ -1720,7 +1733,7 @@ tbody tr:last-child td {
 }
 .judge-actions small {
   display: block;
-  font-size: 10px;
+  font-size: 11.5px;
   color: var(--muted);
   margin-top: 7px;
   line-height: 1.5;
@@ -1806,7 +1819,7 @@ tbody tr:last-child td {
   border: 1px solid #40605a;
   border-radius: 4px;
   color: #a4e1d3;
-  font: 9px "JetBrains Mono";
+  font: 11px "JetBrains Mono";
   white-space: nowrap;
   pointer-events: none;
 }
@@ -1814,7 +1827,7 @@ tbody tr:last-child td {
   position: absolute;
   bottom: 32px;
   left: 20px;
-  font: 8px "JetBrains Mono";
+  font: 10px "JetBrains Mono";
   color: #758fa6;
 }
 .hero-visual {
@@ -1954,7 +1967,7 @@ tbody tr:last-child td {
   font-size: 36px;
 }
 .projector .kpi > span {
-  font-size: 10px;
+  font-size: 11.5px;
 }
 .projector .range-label {
   font-size: 12px;
@@ -2032,10 +2045,10 @@ tbody tr:last-child td {
     font-size: 28px;
   }
   .kpi > small {
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .kpi > span {
-    font-size: 7px;
+    font-size: 9px;
   }
   .sim-small-charts {
     grid-template-columns: 1fr;
@@ -2117,13 +2130,13 @@ tbody tr:last-child td {
     font-size: 17px;
   }
   .hero-counter > span {
-    font-size: 7px;
+    font-size: 9px;
   }
   .hero-counter > strong {
     font-size: 24px;
   }
   .hero-counter small {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   .hero-counter {
     min-width: 0;
@@ -2138,12 +2151,12 @@ tbody tr:last-child td {
     padding: 12px;
   }
   .scenario-tabs.small button {
-    font-size: 8px;
+    font-size: 9.5px;
     padding: 5px 6px;
     gap: 4px;
   }
   .scene-topline {
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .hero h1 {
     white-space: normal;
@@ -2170,7 +2183,7 @@ tbody tr:last-child td {
     padding: 18px 4px;
   }
   .secondary-kpis span {
-    font-size: 6px;
+    font-size: 9px;
   }
   .secondary-kpis strong {
     font-size: 15px;
@@ -2200,7 +2213,7 @@ tbody tr:last-child td {
   }
   .contract-table > div {
     grid-template-columns: 110px 1fr;
-    font-size: 10px;
+    font-size: 11px;
   }
   .implementation-flow {
     grid-template-columns: 1fr 25px 1fr;
@@ -2292,7 +2305,7 @@ tbody tr:last-child td {
     margin-top: 20px;
   }
   .benchmark-note {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   .hero-actions {
     margin-top: 23px;
@@ -2301,7 +2314,7 @@ tbody tr:last-child td {
   .hero-proof {
     flex-direction: row;
     gap: 20px;
-    font-size: 9px;
+    font-size: 10.5px;
     margin-top: 20px;
   }
   .scene-wrap {
@@ -2311,7 +2324,7 @@ tbody tr:last-child td {
     padding: 12px 16px 15px;
   }
   .scenario-tabs.small button {
-    font-size: 10px;
+    font-size: 11px;
     padding: 6px 9px;
   }
   .month-control {
@@ -2319,7 +2332,7 @@ tbody tr:last-child td {
   }
   .ambient-text {
     display: inline;
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .hero-bottom {
     display: grid;
@@ -2329,7 +2342,7 @@ tbody tr:last-child td {
     padding: 25px 0;
   }
   .hero-counter > span {
-    font-size: 6.5px;
+    font-size: 9px;
     line-height: 1.8;
     min-height: 24px;
     margin-bottom: 5px;
@@ -2340,7 +2353,7 @@ tbody tr:last-child td {
   }
   .hero-counter small {
     display: block;
-    font-size: 8px;
+    font-size: 9.5px;
     margin-left: 0;
     margin-top: 5px;
   }
@@ -2360,7 +2373,7 @@ tbody tr:last-child td {
   }
   .reference-project > span {
     margin: 0;
-    font-size: 7px;
+    font-size: 9px;
   }
   .reference-project > strong {
     font-size: 17px;
@@ -2369,7 +2382,7 @@ tbody tr:last-child td {
   .reference-project small {
     margin: 0;
     width: 100%;
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .scroll-hint {
     margin-top: 20px;
@@ -2390,29 +2403,29 @@ tbody tr:last-child td {
     margin-top: 12px;
   }
   .eyebrow {
-    font-size: 8px;
+    font-size: 9.5px;
     letter-spacing: 1px;
   }
   .panel-topline {
     padding: 18px 16px 0;
-    font-size: 8px;
+    font-size: 9.5px;
     gap: 8px;
   }
   .panel-topline > .tag {
-    font-size: 6px;
+    font-size: 9px;
     padding: 4px;
   }
   .chart-legend {
     gap: 13px;
     padding: 17px 16px 0;
-    font-size: 9px;
+    font-size: 10.5px;
     flex-wrap: wrap;
   }
   .chart-legend small {
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .source-caption {
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .panel > .source-caption {
     padding: 0 15px 15px;
@@ -2446,13 +2459,13 @@ tbody tr:last-child td {
   .gap-stat-band > span {
     max-width: none;
     width: 100%;
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .gap-stat-band strong {
     font-size: 25px;
   }
   .gap-stat-band small {
-    font-size: 8px;
+    font-size: 9.5px;
     max-width: 90px;
     line-height: 1.5;
   }
@@ -2463,12 +2476,12 @@ tbody tr:last-child td {
     gap: 1px;
   }
   .scenario-tabs button {
-    font-size: 10px;
+    font-size: 11px;
     padding: 8px;
     gap: 5px;
   }
   .simulator-toolbar > .text-button {
-    font-size: 10px;
+    font-size: 11px;
     gap: 4px;
   }
   .simulator-grid {
@@ -2490,13 +2503,13 @@ tbody tr:last-child td {
     margin: 9px 0 20px;
   }
   .range-label {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   .range-label output {
-    font-size: 10px;
+    font-size: 11px;
   }
   .range-control > small {
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .control-note {
     grid-column: 1/-1;
@@ -2513,7 +2526,7 @@ tbody tr:last-child td {
     padding: 17px;
   }
   .kpi > span {
-    font-size: 8px;
+    font-size: 9.5px;
     line-height: 1.8;
     min-height: 23px;
   }
@@ -2521,7 +2534,7 @@ tbody tr:last-child td {
     font-size: 32px;
   }
   .kpi > small {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   .premium-kpi {
     min-height: 120px;
@@ -2534,27 +2547,27 @@ tbody tr:last-child td {
     padding: 20px 6px;
   }
   .secondary-kpis span {
-    font-size: 6.5px;
+    font-size: 9px;
     line-height: 1.7;
   }
   .secondary-kpis strong {
     font-size: 16px;
   }
   .secondary-kpis small {
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .simulator-chart .panel-topline {
     padding: 17px 15px 0;
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .simulator-chart .chart-legend {
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .sim-small-charts {
     grid-template-columns: 1fr;
   }
   .model-disclaimer {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   .export-row {
     gap: 18px;
@@ -2577,7 +2590,7 @@ tbody tr:last-child td {
     font-size: 20px;
   }
   .rate-unit > small {
-    font-size: 8px;
+    font-size: 9.5px;
     line-height: 1.7;
     max-width: 80px;
   }
@@ -2598,7 +2611,7 @@ tbody tr:last-child td {
     gap: 9px;
   }
   .rate-footnote p {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   .rate-footnote > svg {
     width: 14px;
@@ -2610,7 +2623,7 @@ tbody tr:last-child td {
     padding: 16px 11px;
   }
   .cooling-card > span {
-    font-size: 6px;
+    font-size: 9px;
     letter-spacing: 0;
   }
   .cooling-card h3 {
@@ -2623,11 +2636,11 @@ tbody tr:last-child td {
     white-space: nowrap;
   }
   .cooling-card > small {
-    font-size: 7px;
+    font-size: 9px;
     line-height: 1.7;
   }
   .cooling-card > p {
-    font-size: 8px;
+    font-size: 9.5px;
     line-height: 1.7;
   }
   .cooling-bar {
@@ -2644,11 +2657,11 @@ tbody tr:last-child td {
     margin-top: 4px;
   }
   .decision-note p {
-    font-size: 10px;
+    font-size: 11px;
     flex: 1;
   }
   .decision-note > a {
-    font-size: 9px;
+    font-size: 10.5px;
     margin-left: 26px;
   }
   .method-grid {
@@ -2662,7 +2675,7 @@ tbody tr:last-child td {
     font-size: 15px;
   }
   .method-step p {
-    font-size: 9px;
+    font-size: 10.5px;
     min-height: 60px;
   }
   .method-step:last-child {
@@ -2688,7 +2701,7 @@ tbody tr:last-child td {
   }
   .contract-table > div {
     grid-template-columns: 108px 1fr;
-    font-size: 10px;
+    font-size: 11px;
     gap: 13px;
   }
   .contract-callout {
@@ -2725,7 +2738,7 @@ tbody tr:last-child td {
     padding: 15px;
   }
   .equipment-node small {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   .evidence-copy {
     grid-template-columns: 1fr;
@@ -2735,7 +2748,7 @@ tbody tr:last-child td {
     gap: 27px;
   }
   .limitations {
-    font-size: 10px;
+    font-size: 11px;
     line-height: 2.2;
   }
   .customer-grid {
@@ -2746,7 +2759,7 @@ tbody tr:last-child td {
     font-size: 17px;
   }
   .customer-grid p {
-    font-size: 10px;
+    font-size: 11px;
   }
   .prior-art {
     grid-template-columns: 1fr;
@@ -2754,16 +2767,16 @@ tbody tr:last-child td {
     gap: 20px;
   }
   .prior-art p {
-    font-size: 10px;
+    font-size: 11px;
   }
   .novelty-line {
     gap: 12px;
     flex-direction: column;
     align-items: flex-start;
-    font-size: 10px;
+    font-size: 11px;
   }
   .novelty-line > span {
-    font-size: 7px;
+    font-size: 9px;
     margin: 0;
   }
   .roadmap-grid {
@@ -2800,7 +2813,7 @@ tbody tr:last-child td {
     padding-bottom: 30px;
   }
   .footer p {
-    font-size: 8px;
+    font-size: 9.5px;
   }
   .drawer {
     padding: 40px 22px 25px;
@@ -2821,7 +2834,7 @@ tbody tr:last-child td {
   }
   .qa-panel td,
   .qa-panel th {
-    font-size: 8px;
+    font-size: 9.5px;
     padding: 10px;
   }
   .qa-panel td:nth-child(4) {
@@ -2835,7 +2848,7 @@ tbody tr:last-child td {
     font-size: 14px;
   }
   .projector .range-label {
-    font-size: 10px;
+    font-size: 11px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2849,7 +2862,7 @@ tbody tr:last-child td {
 }
 
 .hero-model-note {
-  font-size: 8px;
+  font-size: 10px;
   color: #718b9d;
   margin-top: 10px;
   text-align: center;
@@ -2860,7 +2873,7 @@ tbody tr:last-child td {
   border-radius: 8px;
 }
 .equipment-table td {
-  font-size: 10px;
+  font-size: 11.5px;
 }
 .projector .hero-model-note {
   display: none;
@@ -2902,7 +2915,7 @@ tbody tr:last-child td {
 }
 .production-step {
   float: right;
-  font: 10px "JetBrains Mono";
+  font: 11.5px "JetBrains Mono";
   color: var(--muted);
 }
 .production-grid h4 {
@@ -2910,7 +2923,7 @@ tbody tr:last-child td {
   margin: 0 0 9px;
 }
 .production-grid p {
-  font-size: 10px;
+  font-size: 11.5px;
   line-height: 1.7;
 }
 .production-callouts {
@@ -2923,7 +2936,7 @@ tbody tr:last-child td {
   display: flex;
   gap: 11px;
   align-items: center;
-  font-size: 10px;
+  font-size: 11.5px;
   flex: 1;
 }
 .production-callouts p:last-child {
@@ -2934,7 +2947,7 @@ tbody tr:last-child td {
 }
 .production-architecture > .source-caption {
   padding: 0;
-  font-size: 9px;
+  font-size: 11px;
 }
 .kpi > strong,
 .hero-counter > strong,
@@ -2998,7 +3011,7 @@ tbody tr:last-child td {
     font-size: 12px;
   }
   .production-grid p {
-    font-size: 9px;
+    font-size: 10.5px;
   }
   .production-callouts {
     flex-direction: column;
