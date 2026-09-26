@@ -1,0 +1,20 @@
+# Requires an Ingress controller, your own DNS name and a provisioned TLS Secret.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: guaranteeiq-web
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: [guaranteeiq.example.com]
+      secretName: guaranteeiq-tls-replace
+  rules:
+    - host: guaranteeiq.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: guaranteeiq-web
+                port: { number: 80 }

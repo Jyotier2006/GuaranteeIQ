@@ -1,0 +1,44 @@
+# Reference only. Replace the image; resource sizing is illustrative, not benchmarked.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guaranteeiq-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: guaranteeiq-web }
+  template:
+    metadata:
+      labels: { app: guaranteeiq-web }
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile: { type: RuntimeDefault }
+      containers:
+        - name: web
+          image: registry.example.com/guaranteeiq:REPLACE_WITH_VERSION
+          ports:
+            - { name: http, containerPort: 8080 }
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits: { cpu: 500m, memory: 256Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: [ALL] }
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            - { name: tmp, mountPath: /tmp }
+      volumes:
+        - name: tmp
+          emptyDir: { medium: Memory, sizeLimit: 64Mi }
