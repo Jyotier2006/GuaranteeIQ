@@ -1208,11 +1208,9 @@ export default function App() {
                           outages: 0,
                         }));
                         setSelected(null);
-                        document
-                          .getElementById("simulator")
-                          ?.scrollIntoView({
-                            behavior: reduced ? "instant" : "smooth",
-                          });
+                        document.getElementById("simulator")?.scrollIntoView({
+                          behavior: reduced ? "instant" : "smooth",
+                        });
                       }
                     }}
                   />
@@ -1540,8 +1538,8 @@ export default function App() {
                   <span>(roadmap — not built for the ideathon)</span>
                 </h3>
                 <p>
-                  The current demo is a static site. This future service would
-                  ingest site evidence and recalibrate pricing.
+                  A future service that ingests site evidence and recalibrates
+                  pricing.
                 </p>
               </div>
               <ol className="production-grid">
@@ -1600,8 +1598,8 @@ export default function App() {
               </div>
               <p className="source-caption">
                 Planned deployment options, not implemented data-residency
-                guarantees. The supplied Docker image serves this static demo;
-                production pricing and ingestion services are roadmap work.
+                guarantees. Production pricing and ingestion services are
+                roadmap work.
               </p>
             </div>
             <div className="table-scroll equipment-table">
@@ -1650,11 +1648,6 @@ export default function App() {
                 </tbody>
               </table>
             </div>
-            <p className="model-disclaimer">
-              <Info size={14} /> Live demo: static website + browser worker.
-              Equipment connections and recalibration are a proposed
-              implementation, not connected services.
-            </p>
           </Reveal>
         </section>
         <section id="evidence" className="section-shell section-pad">
@@ -1714,11 +1707,9 @@ export default function App() {
                     className="text-link"
                     onClick={() => {
                       whatif("No cycle heat effect", { eaCycle: 0 });
-                      document
-                        .getElementById("simulator")
-                        ?.scrollIntoView({
-                          behavior: reduced ? "instant" : "smooth",
-                        });
+                      document.getElementById("simulator")?.scrollIntoView({
+                        behavior: reduced ? "instant" : "smooth",
+                      });
                     }}
                   >
                     Test zero cycle heat effect <ArrowUpRight size={16} />
