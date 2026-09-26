@@ -183,72 +183,78 @@ function CapacityLegend({ site = false }: { site?: boolean }) {
     </div>
   );
 }
+// The layer covers exactly the heatmap plot area (8 × 8 cells). The envelope
+// spans 3 × 3 cells and snaps to them, so its label is the exact range covered.
+const GRID_CELLS = 8,
+  ENVELOPE_CELLS = 3;
 function Envelope() {
-  const [pos, setPos] = useState({ x: 36, y: 33 });
-  const drag = useRef<{ x: number; y: number; px: number; py: number } | null>(
-    null,
-  );
+  const [cell, setCell] = useState({ col: 3, row: 3 }); // top-left; row 0 = β 0.8
+  const drag = useRef<{
+    x: number;
+    y: number;
+    col: number;
+    row: number;
+  } | null>(null);
+  const clamp = (v: number) =>
+    Math.max(0, Math.min(GRID_CELLS - ENVELOPE_CELLS, v));
+  const last = ENVELOPE_CELLS - 1,
+    range = `β ${num(0.8 - (cell.row + last) * 0.1, 1)}–${num(0.8 - cell.row * 0.1, 1)} · ${num(0.8 + cell.col * 0.05, 2)}–${num(0.8 + (cell.col + last) * 0.05, 2)} cycles/day`,
+    size = `${(ENVELOPE_CELLS / GRID_CELLS) * 100}%`;
   return (
     <div className="envelope-layer">
       <div
         className="envelope-box"
-        style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+        style={{
+          left: `${(cell.col / GRID_CELLS) * 100}%`,
+          top: `${(cell.row / GRID_CELLS) * 100}%`,
+          width: size,
+          height: size,
+        }}
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
-          drag.current = { x: e.clientX, y: e.clientY, px: pos.x, py: pos.y };
+          drag.current = { x: e.clientX, y: e.clientY, ...cell };
         }}
         onPointerMove={(e) => {
           if (!drag.current) return;
           const rect = e.currentTarget.parentElement!.getBoundingClientRect();
-          setPos({
-            x: Math.max(
-              0,
-              Math.min(
-                65,
-                drag.current.px +
-                  ((e.clientX - drag.current.x) / rect.width) * 100,
-              ),
+          const d = drag.current;
+          setCell({
+            col: clamp(
+              d.col + Math.round(((e.clientX - d.x) / rect.width) * GRID_CELLS),
             ),
-            y: Math.max(
-              0,
-              Math.min(
-                65,
-                drag.current.py +
-                  ((e.clientY - drag.current.y) / rect.height) * 100,
-              ),
+            row: clamp(
+              d.row +
+                Math.round(((e.clientY - d.y) / rect.height) * GRID_CELLS),
             ),
           });
         }}
         onPointerUp={() => (drag.current = null)}
         onKeyDown={(e) => {
           const d = {
-            ArrowLeft: [-3, 0],
-            ArrowRight: [3, 0],
-            ArrowUp: [0, -3],
-            ArrowDown: [0, 3],
+            ArrowLeft: [-1, 0],
+            ArrowRight: [1, 0],
+            ArrowUp: [0, -1],
+            ArrowDown: [0, 1],
           }[e.key];
           if (d) {
             e.preventDefault();
-            setPos((p) => ({
-              x: Math.max(0, Math.min(65, p.x + d[0])),
-              y: Math.max(0, Math.min(65, p.y + d[1])),
+            setCell((c) => ({
+              col: clamp(c.col + d[0]),
+              row: clamp(c.row + d[1]),
             }));
           }
         }}
         role="slider"
         aria-label="Proposed operating envelope; use arrow keys to move"
         aria-valuemin={0}
-        aria-valuemax={65}
-        aria-valuenow={Math.round(pos.x)}
+        aria-valuemax={GRID_CELLS - ENVELOPE_CELLS}
+        aria-valuenow={cell.col}
+        aria-valuetext={range}
         tabIndex={0}
       >
-        <span>
-          <Move size={12} /> PROPOSED ENVELOPE
+        <span className="envelope-tag">
+          <Move size={11} /> PROPOSED ENVELOPE <b>{range}</b>
         </span>
-        <small>
-          {num(0.8 + (pos.x / 100) * 0.35, 2)}–
-          {num(0.8 + ((pos.x + 35) / 100) * 0.35, 2)} cycles/day
-        </small>
       </div>
     </div>
   );

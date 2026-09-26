@@ -1036,38 +1036,39 @@ kbd {
   position: absolute;
   cursor: grab;
   touch-action: none;
-  width: 35%;
-  height: 35%;
   border: 2px dashed #ecfbf1;
   border-radius: 6px;
-  box-shadow:
-    0 0 0 1px #122a3890,
-    inset 0 0 30px #060e1733;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #081a2425;
-  backdrop-filter: brightness(0.8);
+  box-shadow: 0 0 0 1px #122a3890;
   color: white;
   user-select: none;
+  transition:
+    left 0.15s ease,
+    top 0.15s ease;
 }
 .envelope-box:active {
   cursor: grabbing;
 }
-.envelope-box > span {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  font: 8px "JetBrains Mono";
-  background: #0a182fe6;
-  padding: 6px 9px;
-  border-radius: 4px;
+.envelope-box:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
 }
-.envelope-box > small {
-  font: 8px "JetBrains Mono";
-  background: #0a182fe6;
-  padding: 4px 7px;
+/* Sits on the top border, in the gap between cell rows, so no value is hidden. */
+.envelope-tag {
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font: 500 10px/14px "JetBrains Mono";
+  background: #0a182ff2;
+  padding: 0 7px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.envelope-tag b {
+  font-weight: 500;
+  color: #8fe3cf;
 }
 .rate-footnote {
   display: flex;
@@ -2583,17 +2584,13 @@ tbody tr:last-child td {
   .rate-panel {
     padding: 16px 0 0;
   }
-  .envelope-box > span {
-    font-size: 5px;
-    gap: 2px;
-    padding: 4px 3px;
+  .envelope-tag {
+    font-size: 9px;
+    gap: 4px;
+    padding: 0 5px;
   }
-  .envelope-box > span svg {
-    width: 8px;
-  }
-  .envelope-box > small {
-    font-size: 5px;
-    padding: 4px;
+  .envelope-tag b {
+    display: none;
   }
   .rate-footnote {
     padding: 15px;
