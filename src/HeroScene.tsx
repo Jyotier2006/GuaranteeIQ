@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Html } from "@react-three/drei";
 import { Color, Group, MathUtils } from "three";
 import { MONTHS, MEAN_TEMP, type Scenario } from "./model";
@@ -19,9 +19,19 @@ type Props = {
   light: boolean;
 };
 
+// Cell-temperature colour. In May, Lab/Best (≤29°C) read blue, Base (~32°C)
+// amber, Worst (~36°C) and the heatwave red.
+function heatColor(temperature: number) {
+  const cool = new Color("#3b82f6"),
+    warm = new Color("#e0a100"),
+    hot = new Color("#ef4444");
+  if (temperature <= 29) return cool;
+  if (temperature <= 32) return cool.lerp(warm, (temperature - 29) / 3);
+  return warm.lerp(hot, MathUtils.clamp((temperature - 32) / 3.5, 0, 1));
+}
+
 function StaticBattery({ temperature }: Pick<Props, "temperature">) {
-  const c =
-    temperature >= 38 ? "#e66767" : temperature > 25 ? "#c98500" : "#3987e5";
+  const c = `#${heatColor(temperature).getHexString()}`;
   return (
     <svg
       viewBox="0 0 600 330"
@@ -148,18 +158,13 @@ function Fan({ beta, reduced }: { beta: number; reduced: boolean }) {
 }
 function Battery({ temperature, beta, reduced, month, scenario }: Props) {
   const [hover, setHover] = useState<number | null>(null);
-  const heat =
-    temperature <= 30
-      ? new Color("#3987e5").lerp(
-          new Color("#c98500"),
-          MathUtils.clamp((temperature - 25) / 5, 0, 1),
-        )
-      : new Color("#c98500").lerp(
-          new Color("#e66767"),
-          MathUtils.clamp((temperature - 30) / 8, 0, 1),
-        );
+  const heat = heatColor(temperature);
+  // ~20% larger on wide hero layouts; narrow (mobile) canvases keep full size
+  // so the container is not clipped. The offset keeps it vertically centred.
+  const aspect = useThree((s) => s.size.width / s.size.height),
+    scale = MathUtils.clamp(aspect / 1.6, 1, 1.2);
   return (
-    <group position={[0, -0.8, 0]}>
+    <group position={[0, 0.4 - 1.2 * scale, 0]} scale={scale}>
       <mesh position={[0, 0.03, 0]} receiveShadow>
         <boxGeometry args={[6.9, 0.15, 2.55]} />
         <meshStandardMaterial
@@ -234,7 +239,7 @@ function Battery({ temperature, beta, reduced, month, scenario }: Props) {
                   color="#567078"
                   emissive={heat}
                   emissiveIntensity={
-                    0.1 + Math.max(0, temperature - 25) * 0.006
+                    0.45 + Math.min(0.3, Math.max(0, temperature - 25) * 0.03)
                   }
                   metalness={0.65}
                   roughness={0.45}
@@ -245,7 +250,7 @@ function Battery({ temperature, beta, reduced, month, scenario }: Props) {
                 <meshStandardMaterial
                   color={heat}
                   emissive={heat}
-                  emissiveIntensity={1.4}
+                  emissiveIntensity={2.2}
                 />
               </mesh>
               <mesh position={[0.08, 0, 0.073]}>
