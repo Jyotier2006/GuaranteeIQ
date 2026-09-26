@@ -1,10 +1,10 @@
 # GuaranteeIQ
 
-A browser-based battery-performance guarantee pricing illustration for **Avartan: Sustainability Ideathon 2026, Track 5**. No deployment has been performed. This package includes source, a production build in `dist/`, and QA evidence.
+A browser-based battery-performance guarantee pricing illustration for **Avartan: Sustainability Ideathon 2026, Track 5**. **Live site: https://guaranteeiq.vercel.app** (Vercel, deployed from `main`). This repository includes the source and QA evidence; `npm run build` creates the production build in `dist/`.
 
 ## Run the finished website
 
-From this folder, with Python 3 installed:
+Or run it locally: build once with `npm ci && npm run build` (see below), then, from this folder, with Python 3 installed:
 
 ```sh
 python -m http.server 8080 --directory dist
@@ -29,7 +29,7 @@ npm run build
 npm run preview
 ```
 
-`npm test` runs the 24 model acceptance checks, using 10,000 simulated projects per scenario and seed 42. `npm run build` checks TypeScript and creates `dist/`. Vercel/Netlify settings are supplied for future use; neither provider was deployed to for this handoff.
+`npm test` runs the 24 model acceptance checks, using 10,000 simulated projects per scenario and seed 42. `npm run build` checks TypeScript and creates `dist/`. The live site is deployed on Vercel from `main` using `vercel.json` (Vite preset); Netlify settings are also supplied.
 
 ## Present the demo
 
