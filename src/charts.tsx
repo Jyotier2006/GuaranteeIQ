@@ -5,6 +5,7 @@ import {
   BarChart,
   HeatmapChart,
   ScatterChart,
+  CustomChart,
 } from "echarts/charts";
 import {
   GridComponent,
@@ -25,6 +26,7 @@ echarts.use([
   BarChart,
   HeatmapChart,
   ScatterChart,
+  CustomChart,
   GridComponent,
   TooltipComponent,
   LegendComponent,
@@ -66,16 +68,15 @@ export function Chart({
       chart.dispose();
     };
   }, []);
+  // Merge updates into the existing chart (each chart keeps a fixed series
+  // list) so lines morph smoothly instead of replaying their draw-in animation.
   useEffect(() => {
-    instance.current?.setOption(
-      {
-        ...option,
-        animation: !matchMedia("(prefers-reduced-motion: reduce)").matches,
-        animationDuration: 500,
-        animationDurationUpdate: 350,
-      },
-      { notMerge: true },
-    );
+    instance.current?.setOption({
+      ...option,
+      animation: !matchMedia("(prefers-reduced-motion: reduce)").matches,
+      animationDuration: 500,
+      animationDurationUpdate: 350,
+    });
   }, [option]);
   return (
     <div
@@ -123,37 +124,41 @@ export function capacityOption(
 ): EChartsCoreOption {
   const p = palette(light);
   const series: Record<string, unknown>[] = [];
+  const colorOf = (name: string, color?: string) =>
+    color ??
+    (light && name === "Lab" ? "#66757d" : COLORS[name as Scenario]) ??
+    "#14b8a6";
+  // 60–100% keeps the curves apart; extend down only if a P10 band needs it.
+  const lowest = Math.min(
+    ...items.flatMap(({ result }) => result.curve.map((x) => x.p10 * 100)),
+  );
+  const yMin = Math.min(60, Math.floor(lowest / 10) * 10);
   items.forEach(({ name, result, color }) => {
-    const c =
-      color ??
-      (light && name === "Lab" ? "#66757d" : COLORS[name as Scenario]) ??
-      "#14b8a6";
-    const lower = result.curve.map((x) => [x.year, x.p10 * 100]);
-    const width = result.curve.map((x) => [x.year, (x.p90 - x.p10) * 100]);
+    const c = colorOf(name, color);
     series.push(
+      // P10–P90 band as one filled polygon (stacked areas do not render on a
+      // numeric x-axis).
       {
-        name: `${name} P10`,
-        type: "line",
-        stack: `band-${name}`,
-        data: lower,
-        symbol: "none",
-        lineStyle: { opacity: 0 },
-        areaStyle: { opacity: 0 },
+        name: `${name} band`,
+        type: "custom",
         silent: true,
         tooltip: { show: false },
-        emphasis: { disabled: true },
-      },
-      {
-        name: `${name} P90`,
-        type: "line",
-        stack: `band-${name}`,
-        data: width,
-        symbol: "none",
-        lineStyle: { opacity: 0 },
-        areaStyle: { color: c, opacity: 0.08 },
-        silent: true,
-        tooltip: { show: false },
-        emphasis: { disabled: true },
+        data: [[0, 100]],
+        renderItem: (
+          _params: unknown,
+          api: { coord: (value: number[]) => number[] },
+        ) => ({
+          type: "polygon",
+          shape: {
+            points: [
+              ...result.curve.map((x) => api.coord([x.year, x.p90 * 100])),
+              ...[...result.curve]
+                .reverse()
+                .map((x) => api.coord([x.year, x.p10 * 100])),
+            ],
+          },
+          style: { fill: c, opacity: 0.18 },
+        }),
       },
       {
         name,
@@ -167,24 +172,20 @@ export function capacityOption(
           color: c,
         },
         itemStyle: { color: c },
-        endLabel: {
-          show: true,
-          formatter: `${name}`,
-          color: c,
-          fontFamily: "Inter",
-          fontSize: 11,
-        },
-        labelLayout: { moveOverlap: "shiftY" },
         markLine:
           name === items[0].name
             ? {
                 silent: true,
+                animation: false,
                 symbol: "none",
                 lineStyle: { color: p.text, type: "dashed", opacity: 0.7 },
+                // Left end: every curve is still near 100% there, so the
+                // label never sits on a line.
                 label: {
-                  formatter: `Year 10 · ${num(guarantee * 100, 0)}%`,
+                  formatter: `Year-10 guarantee · ${num(guarantee * 100, 0)}%`,
                   color: p.text,
-                  position: "insideEndTop",
+                  fontSize: 12,
+                  position: "insideStartTop",
                 },
                 data: [
                   [
@@ -203,18 +204,55 @@ export function capacityOption(
     symbolSize: 9,
     itemStyle: { color: "#14b8a6" },
     data: [[12, 70]],
-    label: {
-      show: true,
-      formatter: "Y12 · 70%",
-      position: "bottom",
-      color: p.text,
-      fontSize: 10,
-    },
+    silent: true,
+    tooltip: { show: false },
   });
+  // Right-hand labels (curve ends + Y12 reference) as one column, nudged
+  // apart so close curves such as Lab and Best never overlap.
+  const gap = (100 - yMin) * 0.075;
+  const labels = [
+    ...items.map(({ name, result, color }) => ({
+      text: name,
+      color: colorOf(name, color),
+      y: result.curve[result.curve.length - 1].median * 100,
+    })),
+    { text: "Y12 · 70%", color: p.text, y: 70 },
+  ].sort((a, b) => b.y - a.y);
+  labels.forEach((l, i) => {
+    if (i > 0) l.y = Math.min(l.y, labels[i - 1].y - gap);
+  });
+  for (let i = labels.length - 1; i >= 0; i--)
+    labels[i].y = Math.max(
+      labels[i].y,
+      i === labels.length - 1 ? yMin + gap / 2 : labels[i + 1].y + gap,
+    );
+  labels.forEach((l) =>
+    series.push({
+      name: `${l.text} label`,
+      type: "scatter",
+      data: [[12, l.y]],
+      symbolSize: 1,
+      // Transparent, not opacity 0: labels inherit the symbol opacity.
+      itemStyle: { color: "transparent" },
+      silent: true,
+      tooltip: { show: false },
+      label: {
+        show: true,
+        formatter: l.text,
+        position: "right",
+        distance: 9,
+        color: l.color,
+        fontFamily: "Inter",
+        fontSize: 12,
+        fontWeight: 500,
+      },
+    }),
+  );
+  const curveNames = new Set(items.map((x) => x.name));
   return {
     backgroundColor: "transparent",
     textStyle: { fontFamily: "Inter", color: p.text },
-    grid: { left: 48, right: 68, top: 30, bottom: 45 },
+    grid: { left: 52, right: 80, top: 30, bottom: 45 },
     tooltip: {
       trigger: "axis",
       backgroundColor: p.bg,
@@ -229,7 +267,7 @@ export function capacityOption(
         return (
           `Year ${num(a[0]?.value[0] ?? 0, 1)}<br/>` +
           a
-            .filter((x) => !x.seriesName.includes(" P"))
+            .filter((x) => curveNames.has(x.seriesName))
             .map(
               (x) =>
                 `${x.marker} ${x.seriesName}: <b>${num(x.value[1], 1)}%</b>`,
@@ -247,20 +285,20 @@ export function capacityOption(
       nameLocation: "middle",
       nameGap: 30,
       axisLine: { lineStyle: { color: p.grid } },
-      axisLabel: { color: p.text },
+      axisLabel: { color: p.text, fontSize: 12 },
       splitLine: { show: false },
     },
     yAxis: {
       type: "value",
-      min: 45,
+      min: yMin,
       max: 100,
       interval: 10,
       name: "Usable capacity (%)",
       nameLocation: "middle",
-      nameGap: 36,
+      nameGap: 40,
       nameRotate: 90,
-      nameTextStyle: { color: p.text },
-      axisLabel: { formatter: "{value}%", color: p.text },
+      nameTextStyle: { color: p.text, fontSize: 12 },
+      axisLabel: { formatter: "{value}%", color: p.text, fontSize: 12 },
       splitLine: { lineStyle: { color: p.grid, type: "dashed" } },
     },
     series,
@@ -268,8 +306,11 @@ export function capacityOption(
 }
 export function histogramOption(r: Result, light = false): EChartsCoreOption {
   const p = palette(light);
+  const span =
+      (r.histogram.at(-1)?.value ?? 100) - (r.histogram[0]?.value ?? 0),
+    step = span > 30 ? 10 : 5;
   return {
-    grid: { left: 45, right: 18, top: 25, bottom: 45 },
+    grid: { left: 64, right: 18, top: 28, bottom: 48 },
     tooltip: {
       trigger: "axis",
       backgroundColor: p.bg,
@@ -280,18 +321,21 @@ export function histogramOption(r: Result, light = false): EChartsCoreOption {
       type: "value",
       name: "Year-10 usable capacity (%)",
       nameLocation: "middle",
-      nameGap: 30,
-      axisLabel: { color: p.text },
+      nameGap: 32,
+      nameTextStyle: { fontSize: 12 },
+      axisLabel: { color: p.text, fontSize: 12 },
       splitLine: { show: false },
-      min: Math.max(0, r.histogram[0]?.value - 2),
+      min: Math.max(0, Math.floor((r.histogram[0]?.value - 2) / step) * step),
+      interval: step,
     },
     yAxis: {
       type: "value",
       name: "Simulated projects",
       nameLocation: "middle",
-      nameGap: 30,
+      nameGap: 48,
       nameRotate: 90,
-      axisLabel: { color: p.text },
+      nameTextStyle: { fontSize: 12 },
+      axisLabel: { color: p.text, fontSize: 12 },
       splitLine: { lineStyle: { color: p.grid } },
     },
     series: [
@@ -308,9 +352,11 @@ export function histogramOption(r: Result, light = false): EChartsCoreOption {
           },
         })),
         markLine: {
+          silent: true,
+          animation: false,
           symbol: "none",
           lineStyle: { color: p.white, type: "dashed" },
-          label: { formatter: "Guarantee", color: p.text },
+          label: { formatter: "Guarantee", color: p.text, fontSize: 12 },
           data: [{ xAxis: r.inputs.guarantee * 100 }],
         },
       },
@@ -340,8 +386,9 @@ export function rateOption(
       data: Array.from({ length: 8 }, (_, i) => num(0.8 + i * 0.05, 2)),
       name: "Average cycles per day",
       nameLocation: "middle",
-      nameGap: 32,
-      axisLabel: { color: p.text },
+      nameGap: 34,
+      nameTextStyle: { fontSize: 12 },
+      axisLabel: { color: p.text, fontSize: 12 },
       axisLine: { show: false },
       axisTick: { show: false },
       splitArea: { show: true },
@@ -350,8 +397,8 @@ export function rateOption(
       type: "category",
       data: Array.from({ length: 8 }, (_, i) => num((i + 1) / 10, 1)),
       name: "Ambient coupling β",
-      nameTextStyle: { color: p.text },
-      axisLabel: { color: p.text },
+      nameTextStyle: { color: p.text, fontSize: 12 },
+      axisLabel: { color: p.text, fontSize: 12 },
       axisLine: { show: false },
       axisTick: { show: false },
     },
@@ -377,7 +424,7 @@ export function rateOption(
           formatter: (p: { value: number[] }) => num(p.value[2], 0),
           color: "#ffffff",
           fontFamily: "JetBrains Mono",
-          fontSize: 11,
+          fontSize: 12,
         },
         itemStyle: {
           borderWidth: 4,
@@ -395,7 +442,7 @@ export function tornadoOption(
 ): EChartsCoreOption {
   const p = palette(light);
   return {
-    grid: { left: 178, right: 35, top: 25, bottom: 45 },
+    grid: { left: 192, right: 35, top: 25, bottom: 48 },
     tooltip: {
       trigger: "axis",
       backgroundColor: p.bg,
@@ -403,20 +450,20 @@ export function tornadoOption(
       textStyle: { color: p.white },
     },
     legend: {
-      textStyle: { color: p.text },
+      textStyle: { color: p.text, fontSize: 12 },
       data: ["Lower-risk assumption", "Higher-risk assumption"],
       bottom: 0,
     },
     xAxis: {
       type: "value",
-      axisLabel: { formatter: "{value}%", color: p.text },
+      axisLabel: { formatter: "{value}%", color: p.text, fontSize: 12 },
       splitLine: { lineStyle: { color: p.grid } },
     },
     yAxis: {
       type: "category",
       inverse: true,
       data: rows.map((x) => x.label),
-      axisLabel: { color: p.text, fontSize: 11 },
+      axisLabel: { color: p.text, fontSize: 12 },
       axisTick: { show: false },
       axisLine: { show: false },
     },
