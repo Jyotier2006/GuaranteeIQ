@@ -325,7 +325,9 @@ export function histogramOption(r: Result, light = false): EChartsCoreOption {
       nameTextStyle: { fontSize: 12 },
       axisLabel: { color: p.text, fontSize: 12 },
       splitLine: { show: false },
+      // Both ends on whole steps, so edge labels never crowd their neighbours.
       min: Math.max(0, Math.floor((r.histogram[0]?.value - 2) / step) * step),
+      max: Math.ceil(((r.histogram.at(-1)?.value ?? 100) + 2) / step) * step,
       interval: step,
     },
     yAxis: {
